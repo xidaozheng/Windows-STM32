@@ -50,11 +50,11 @@ CPU_INT32U  BSP_CPU_ClkFreq_MHz;
 #error  "                               using uC/Probe COM modules    "
 #endif
 
-
+#include "bsp_led.h"
 
 void  BSP_Init (void)
 {
- 
+	bspLedInit();
 }
 
 

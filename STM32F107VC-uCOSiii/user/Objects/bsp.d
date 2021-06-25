@@ -42,3 +42,4 @@
 .\objects\bsp.o: ..\library\inc\stm32f10x_wwdg.h
 .\objects\bsp.o: ..\library\inc\misc.h
 .\objects\bsp.o: .\APP\app_cfg.h
+.\objects\bsp.o: BSP\bsp_led.h
