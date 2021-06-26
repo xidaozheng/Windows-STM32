@@ -3,7 +3,9 @@
 
 #include "stm32f10x.h"
 
+
 extern void bspLedInit(void);
+extern void bspLedToggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 #endif
 

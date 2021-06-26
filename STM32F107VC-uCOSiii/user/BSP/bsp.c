@@ -1,9 +1,87 @@
+/*
+*********************************************************************************************************
+*                                     MICIRUM BOARD SUPPORT PACKAGE
+*
+*                             (c) Copyright 2013; Micrium, Inc.; Weston, FL
+*
+*               All rights reserved.  Protected by international copyright laws.
+*               Knowledge of the source code may NOT be used to develop a similar product.
+*               Please help us continue to provide the Embedded community with the finest
+*               software available.  Your honesty is greatly appreciated.
+*********************************************************************************************************
+*/
+
+/*
+*********************************************************************************************************
+*
+*                                        BOARD SUPPORT PACKAGE
+*
+*                                     ST Microelectronics STM32
+*                                              on the
+*
+*                                     Micrium uC-Eval-STM32F107
+*                                        Evaluation Board
+*
+* Filename      : bsp.c
+* Version       : V1.00
+* Programmer(s) : EHS
+*********************************************************************************************************
+*/
+
+/*
+*********************************************************************************************************
+*                                             INCLUDE FILES
+*********************************************************************************************************
+*/
+
 #define  BSP_MODULE
 #include <bsp.h>
 
 
+/*
+*********************************************************************************************************
+*                                            LOCAL DEFINES
+*********************************************************************************************************
+*/
+
+
+/*
+*********************************************************************************************************
+*                                           LOCAL CONSTANTS
+*********************************************************************************************************
+*/
+
+
+
+/*
+*********************************************************************************************************
+*                                          LOCAL DATA TYPES
+*********************************************************************************************************
+*/
+
+
+/*
+*********************************************************************************************************
+*                                            LOCAL TABLES
+*********************************************************************************************************
+*/
+
+
+/*
+*********************************************************************************************************
+*                                       LOCAL GLOBAL VARIABLES
+*********************************************************************************************************
+*/
 
 CPU_INT32U  BSP_CPU_ClkFreq_MHz;
+
+
+/*
+*********************************************************************************************************
+*                                      LOCAL FUNCTION PROTOTYPES
+*********************************************************************************************************
+*/
+
 
 
 /*
@@ -41,7 +119,7 @@ CPU_INT32U  BSP_CPU_ClkFreq_MHz;
 *                                     LOCAL CONFIGURATION ERRORS
 *********************************************************************************************************
 */
-
+/*
 #if ((CPU_CFG_TS_TMR_EN          != DEF_ENABLED) && \
      (APP_CFG_PROBE_OS_PLUGIN_EN == DEF_ENABLED) && \
      (OS_PROBE_HOOKS_EN          >  0u))
@@ -50,11 +128,40 @@ CPU_INT32U  BSP_CPU_ClkFreq_MHz;
 #error  "                               using uC/Probe COM modules    "
 #endif
 
-#include "bsp_led.h"
+*/
+/*
+*********************************************************************************************************
+*                                               BSP_Init()
+*
+* Description : Initialize the Board Support Package (BSP).
+*
+* Argument(s) : none.
+*
+* Return(s)   : none.
+*
+* Caller(s)   : Application.
+*
+* Note(s)     : (1) This function SHOULD be called before any other BSP function is called.
+*
+*               (2) CPU instruction / data tracing requires the use of the following pins :
+*                   (a) (1) Aysynchronous     :  PB[3]
+*                       (2) Synchronous 1-bit :  PE[3:2]
+*                       (3) Synchronous 2-bit :  PE[4:2]
+*                       (4) Synchronous 4-bit :  PE[6:2]
+*
+*                   (b) The uC-Eval board MAY utilize the following pins depending on the application :
+*                       (1) PE[5], MII_INT
+*                       (1) PE[6], SDCard_Detection
+*
+*                   (c) The application may wish to adjust the trace bus width depending on I/O
+*                       requirements.
+*********************************************************************************************************
+*/
 
 void  BSP_Init (void)
 {
-	bspLedInit();
+	bspLedInit(); 
+	
 }
 
 
@@ -82,38 +189,6 @@ CPU_INT32U  BSP_CPU_ClkFreq (void)
     RCC_GetClocksFreq(&rcc_clocks);
 
     return ((CPU_INT32U)rcc_clocks.HCLK_Frequency);
-}
-
-/*
-*********************************************************************************************************
-*                                            BSP_StatusRd()
-*
-* Description : Get the current status of a status input
-*
-* Argument(s) : id    is the status you want to get.
-*
-* Return(s)   : DEF_ON    if the status is asserted
-*               DEF_OFF   if the status is negated
-*
-* Caller(s)   : application
-*
-* Note(s)     : none.
-*********************************************************************************************************
-*/
-
-CPU_BOOLEAN  BSP_StatusRd (CPU_INT08U  id)
-{
-    CPU_BOOLEAN  bit_val;
-
-
-    switch (id) {
-        case 1:
-             bit_val = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5);
-             return (bit_val);
-
-        default:
-             return ((CPU_BOOLEAN)DEF_OFF);
-    }
 }
 
 
@@ -231,13 +306,13 @@ CPU_INT32U  OSProbe_TmrRd (void)
 void  CPU_TS_TmrInit (void)
 {
     CPU_INT32U  cpu_clk_freq_hz;
-      
-      
+
+
     DEM_CR         |= (CPU_INT32U)DEM_CR_TRCENA;                /* Enable Cortex-M3's DWT CYCCNT reg.                   */
     DWT_CYCCNT      = (CPU_INT32U)0u;
     DWT_CR         |= (CPU_INT32U)DWT_CR_CYCCNTENA;
 
-    cpu_clk_freq_hz = BSP_CPU_ClkFreq();    
+    cpu_clk_freq_hz = BSP_CPU_ClkFreq();
     CPU_TS_TmrFreqSet(cpu_clk_freq_hz);
 }
 #endif

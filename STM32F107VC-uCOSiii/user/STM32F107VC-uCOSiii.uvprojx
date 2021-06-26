@@ -538,6 +538,11 @@
           <GroupName>APP</GroupName>
           <Files>
             <File>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\app.c</FilePath>
+            </File>
+            <File>
               <FileName>app_cfg.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\APP\app_cfg.h</FilePath>
@@ -581,11 +586,6 @@
               <FileName>stm32f10x_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\APP\stm32f10x_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\APP\app.c</FilePath>
             </File>
           </Files>
         </Group>
