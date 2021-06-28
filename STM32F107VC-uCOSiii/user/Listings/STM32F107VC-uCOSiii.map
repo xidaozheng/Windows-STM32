@@ -88,21 +88,6 @@ Section Cross References
     stm32f10x_usart.o(i.USART_DeInit) refers to stm32f10x_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
     stm32f10x_usart.o(i.USART_Init) refers to stm32f10x_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
     stm32f10x_wwdg.o(i.WWDG_DeInit) refers to stm32f10x_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
-    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_a.o(.text) for CPU_SR_Save
-    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStart) for CPU_IntDisMeasStart
-    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStop) for CPU_IntDisMeasStop
-    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to os_var.o(.data) for OS_AppTaskCreateHookPtr
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_a.o(.text) for CPU_SR_Save
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStart) for CPU_IntDisMeasStart
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStop) for CPU_IntDisMeasStop
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskCreateHook) for App_OS_TaskCreateHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_var.o(.data) for OS_AppTaskCreateHookPtr
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskDelHook) for App_OS_TaskDelHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskReturnHook) for App_OS_TaskReturnHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_IdleTaskHook) for App_OS_IdleTaskHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_StatTaskHook) for App_OS_StatTaskHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskSwHook) for App_OS_TaskSwHook
-    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TimeTickHook) for App_OS_TimeTickHook
     app.o(i.LED1ToggleTastStart) refers to bsp.o(i.BSP_Init) for BSP_Init
     app.o(i.LED1ToggleTastStart) refers to cpu_core.o(i.CPU_Init) for CPU_Init
     app.o(i.LED1ToggleTastStart) refers to bsp.o(i.BSP_CPU_ClkFreq) for BSP_CPU_ClkFreq
@@ -118,6 +103,21 @@ Section Cross References
     app.o(i.main) refers to os_core.o(i.OSStart) for OSStart
     app.o(i.main) refers to app.o(.bss) for AppTaskStartStk
     app.o(i.main) refers to app.o(i.LED1ToggleTastStart) for LED1ToggleTastStart
+    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStart) for CPU_IntDisMeasStart
+    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStop) for CPU_IntDisMeasStop
+    os_app_hooks.o(i.App_OS_ClrAllHooks) refers to os_var.o(.data) for OS_AppTaskCreateHookPtr
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStart) for CPU_IntDisMeasStart
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to cpu_core.o(i.CPU_IntDisMeasStop) for CPU_IntDisMeasStop
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskCreateHook) for App_OS_TaskCreateHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_var.o(.data) for OS_AppTaskCreateHookPtr
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskDelHook) for App_OS_TaskDelHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskReturnHook) for App_OS_TaskReturnHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_IdleTaskHook) for App_OS_IdleTaskHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_StatTaskHook) for App_OS_StatTaskHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TaskSwHook) for App_OS_TaskSwHook
+    os_app_hooks.o(i.App_OS_SetAllHooks) refers to os_app_hooks.o(i.App_OS_TimeTickHook) for App_OS_TimeTickHook
     bsp.o(i.BSP_CPU_ClkFreq) refers to stm32f10x_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
     bsp.o(i.BSP_Init) refers to bsp_led.o(i.bspLedInit) for bspLedInit
     bsp.o(i.CPU_TS_TmrInit) refers to bsp.o(i.BSP_CPU_ClkFreq) for BSP_CPU_ClkFreq
@@ -1839,51 +1839,51 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
@@ -2779,7 +2779,7 @@ Memory Map of the image
     0x08000710   0x08000710   0x00000004   Code   RO         1359    i.GPIO_ResetBits    stm32f10x_gpio.o
     0x08000714   0x08000714   0x00000004   Code   RO         1360    i.GPIO_SetBits      stm32f10x_gpio.o
     0x08000718   0x08000718   0x00000004   Code   RO           20    i.HardFault_Handler  stm32f10x_it.o
-    0x0800071c   0x0800071c   0x00000050   Code   RO         3333    i.LED1ToggleTastStart  app.o
+    0x0800071c   0x0800071c   0x00000050   Code   RO         3222    i.LED1ToggleTastStart  app.o
     0x0800076c   0x0800076c   0x00000004   Code   RO           21    i.MemManage_Handler  stm32f10x_it.o
     0x08000770   0x08000770   0x00000012   Code   RO         3803    i.Mem_Clr           lib_mem.o
     0x08000782   0x08000782   0x00000002   PAD
@@ -2897,7 +2897,7 @@ Memory Map of the image
     0x08004ee8   0x08004ee8   0x00000004   Code   RO           24    i.UsageFault_Handler  stm32f10x_it.o
     0x08004eec   0x08004eec   0x00000038   Code   RO         3417    i.bspLedInit        bsp_led.o
     0x08004f24   0x08004f24   0x00000030   Code   RO         3418    i.bspLedToggle      bsp_led.o
-    0x08004f54   0x08004f54   0x00000060   Code   RO         3334    i.main              app.o
+    0x08004f54   0x08004f54   0x00000060   Code   RO         3223    i.main              app.o
     0x08004fb4   0x08004fb4   0x000000a4   Data   RO         4079    .constdata          os_cfg_app.o
     0x08005058   0x08005058   0x0000016c   Data   RO         4347    .constdata          os_dbg.o
     0x080051c4   0x080051c4   0x00000020   Data   RO         5450    Region$$Table       anon$$obj.o
@@ -2916,7 +2916,7 @@ Memory Map of the image
     0x2000003c   0x08005220   0x00000004   Data   RW         4641    .data               os_prio.o
     0x20000040   0x08005224   0x000000d0   Data   RW         5197    .data               os_var.o
     0x20000110   0x080052f4   0x00000004   Data   RW         5224    .data               os_cpu_c.o
-    0x20000114        -       0x000002c8   Zero   RW         3335    .bss                app.o
+    0x20000114        -       0x000002c8   Zero   RW         3224    .bss                app.o
     0x200003dc        -       0x00000010   Zero   RW         3465    .bss                cpu_core.o
     0x200003ec        -       0x00006c48   Zero   RW         3821    .bss                lib_mem.o
     0x20007034        -       0x00001490   Zero   RW         4078    .bss                os_cfg_app.o
@@ -2933,14 +2933,13 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       176         38          0          0        712       1515   app.o
+       176         38          0          0        712      42114   app.o
         88         14          0          0          0       1773   bsp.o
        104         10          0          4          0       1276   bsp_led.o
          0          0          0          0          0       4540   core_cm3.o
         52          0          0          0          0        332   cpu_a.o
        540         98          0         28         16      16185   cpu_core.o
        188         18          0          4      27720      13503   lib_mem.o
-         0          0          0          0          0      40595   os_app_hooks.o
          2          0        164          0       5264      20886   os_cfg_app.o
       2952        402          0          0          0      18992   os_core.o
        132         32          0          0          0        376   os_cpu_a.o
@@ -2968,7 +2967,7 @@ Image component sizes
        396         32          0          0          0       1841   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-     19788       2154        896        276      36644     466034   Object Totals
+     19788       2154        896        276      36644     466038   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         14          0          0          2          0          0   (incl. Padding)
 
@@ -3017,8 +3016,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     20068       2170        896        276      36740     459646   Grand Totals
-     20068       2170        896        276      36740     459646   ELF Image Totals
+     20068       2170        896        276      36740     459650   Grand Totals
+     20068       2170        896        276      36740     459650   ELF Image Totals
      20068       2170        896        276          0          0   ROM Totals
 
 ==============================================================================
