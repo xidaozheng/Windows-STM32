@@ -171,8 +171,8 @@ static  void  AppTaskStart (void *p_arg)
     
     /* 配置时间片轮转调度 */		
     OSSchedRoundRobinCfg((CPU_BOOLEAN   )DEF_ENABLED,          //使能时间片轮转调度
-		                     (OS_TICK       )0,                    //把 OSCfg_TickRate_Hz / 10 设为默认时间片值
-												 (OS_ERR       *)&err );               //返回错误类型
+		                (OS_TICK       )0,                    //把 OSCfg_TickRate_Hz / 10 设为默认时间片值
+						(OS_ERR       *)&err );               //返回错误类型
 
 
 		/* 创建 LED1 任务 */
