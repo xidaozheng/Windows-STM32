@@ -53,7 +53,6 @@
 static  OS_TCB   AppTaskStartTCB;
 static	OS_TCB	 AppTaskLed1TCB;
 static	OS_TCB	 AppTaskLed2TCB;
-static	OS_TCB	 AppTaskUsart2TCB;
 
 /*
 *********************************************************************************************************
@@ -64,7 +63,6 @@ static	OS_TCB	 AppTaskUsart2TCB;
 static  CPU_STK  AppTaskStartStk[APP_TASK_START_STK_SIZE];
 static  CPU_STK  AppTaskLed1Stk[APP_TASK_LED1_STK_SIZE];
 static  CPU_STK  AppTaskLed2Stk[APP_TASK_LED2_STK_SIZE];
-static  CPU_STK  AppTaskUsart2Stk[APP_TASK_USART2_STK_SIZE];
 
 /*
 *********************************************************************************************************
@@ -75,7 +73,6 @@ static  CPU_STK  AppTaskUsart2Stk[APP_TASK_USART2_STK_SIZE];
 static  void AppTaskStart  (void *p_arg);
 static	void AppTaskLed1(void *p_arg);
 static	void AppTaskLed2(void *p_arg);
-static	void AppTaskUsart2(void *p_arg);
 
 
 /*
@@ -96,7 +93,8 @@ int  main (void)
     OS_ERR  err;
 
 	
-    OSInit(&err);                                               /* Init uC/OS-III.                                      */
+    OSInit(&err);  
+                                             /* Init uC/OS-III.                                      */
 
     OSTaskCreate((OS_TCB     *)&AppTaskStartTCB,                /* Create the start task                                */
                  (CPU_CHAR   *)"App Task Start",				/* 任务名字												*/
@@ -111,19 +109,9 @@ int  main (void)
                  (void       *) 0,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);														/*错误代码*/
-
-    if(err != OS_ERR_NONE)
-	{
-		/* The task didn't get created. Lookup the value of the error code ... 	*/
-		/* ... in OS.H for the meaning of the error								*/
-	}
 		
 	//全局只需要一个启动
 	OSStart(&err);                                             /* Start multitasking (i.e. give control to uC/OS-III). */
-	if(err != OS_ERR_NONE)
-	{
-		/* Your code is NEVER supposed to come back to this point.				*/
-	}
 }
 
 
@@ -167,11 +155,6 @@ static  void  AppTaskStart (void *p_arg)
 
     CPU_IntDisMeasMaxCurReset();
 
-	//由于三个任务的优先级相同，所以需要配置时间片进行轮转调度
-	OSSchedRoundRobinCfg ((CPU_BOOLEAN   )DEF_ENABLED,			//使能时间片轮转调度
-                          (OS_TICK       )0,					//把OSCfg_TickRate_Hz / 10 设为默认时间片值
-                          (OS_ERR       *)&err
-						 );
 
 	OSTaskCreate ( (OS_TCB		*)      &AppTaskLed1TCB,
                    (CPU_CHAR	*)      "App Task Led1",
@@ -202,21 +185,7 @@ static  void  AppTaskStart (void *p_arg)
                    (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                    (OS_ERR      *)		&err
 				 );
-				   
-	OSTaskCreate ( (OS_TCB		*)      &AppTaskUsart2TCB,
-				   (CPU_CHAR	*)      "App Task Usart2",
-				   (OS_TASK_PTR  )  	AppTaskUsart2,
-				   (void        *)		0u,
-				   (OS_PRIO      )  	APP_TASK_USART2_PRIO,
-				   (CPU_STK     *)		&AppTaskUsart2Stk[0],
-				   (CPU_STK_SIZE )  	APP_TASK_USART2_STK_SIZE/10,
-				   (CPU_STK_SIZE )  	APP_TASK_USART2_STK_SIZE,
-				   (OS_MSG_QTY   )  	5u,
-				   (OS_TICK      )  	0u,
-				   (void        *)		0,
-				   (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
-				   (OS_ERR      *)		&err
-			 );
+
 				   
 	OSTaskDel(&AppTaskStartTCB, &err);	//删除主任务
 	if(err != OS_ERR_NONE)
@@ -235,7 +204,10 @@ static	void AppTaskLed1(void *p_arg)
 	while(DEF_TRUE)
 	{
 		bspLedToggle(GPIOD, GPIO_Pin_13);
+		
 		OSTimeDly(500, OS_OPT_TIME_DLY, &err);
+		
+		OSTaskSuspend(0, &err);
 	}
 }
 
@@ -248,23 +220,10 @@ static	void AppTaskLed2(void *p_arg)
 	while(DEF_TRUE)
 	{
 		bspLedToggle(GPIOD, GPIO_Pin_14);
-		OSTimeDly(1000, OS_OPT_TIME_DLY, &err);
+		OSTimeDly(500, OS_OPT_TIME_DLY, &err);
 	}
 }
 
-static	void AppTaskUsart2(void *p_arg)
-{
-	OS_ERR err;
-	
-	(void)p_arg;
-	
-	while(DEF_TRUE)
-	{
-		printf("AppTaskUsart2 Running\n");
-		
-		OSTimeDly(1000, OS_OPT_TIME_DLY, &err);
-	}
-}
 
 
 

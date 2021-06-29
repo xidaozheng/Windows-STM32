@@ -729,7 +729,7 @@ I (..\library\inc\stm32f10x_tim.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_usart.h)(0x60D9650B)
 I (..\library\inc\misc.h)(0x60D96509)
 F (..\Doc\readme.txt)(0x60D96509)()
-F (.\APP\app.c)(0x60DAE032)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\library\inc -I ..\sys\CoreSupport -I ..\sys -I ..\user -I .\APP -I .\BSP -I ..\uCos-III\uC-CPU -I ..\uCos-III\uC-LIB -I ..\uCos-III\uC-CPU\ARM-Cortex-M3\RealView -I ..\uCos-III\uC-LIB\Ports\ARM-Cortex-M3\RealView -I ..\uCos-III\uCOS-III\Source -I ..\uCos-III\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView -I .\BSP\uCOS-III-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_CL -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
+F (.\APP\app.c)(0x60DAF690)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\library\inc -I ..\sys\CoreSupport -I ..\sys -I ..\user -I .\APP -I .\BSP -I ..\uCos-III\uC-CPU -I ..\uCos-III\uC-LIB -I ..\uCos-III\uC-CPU\ARM-Cortex-M3\RealView -I ..\uCos-III\uC-LIB\Ports\ARM-Cortex-M3\RealView -I ..\uCos-III\uCOS-III\Source -I ..\uCos-III\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView -I .\BSP\uCOS-III-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_CL -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
 I (.\APP\includes.h)(0x60D9651B)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599EDB3A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
@@ -774,14 +774,14 @@ I (..\library\inc\stm32f10x_tim.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_usart.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_wwdg.h)(0x60D9650C)
 I (..\library\inc\misc.h)(0x60D96509)
-I (.\APP\app_cfg.h)(0x60DABA03)
+I (.\APP\app_cfg.h)(0x60DAF632)
 I (.\BSP\bsp_led.h)(0x60D9651C)
 I (.\BSP\bsp_usart2.h)(0x60DABB96)
 I (..\uCos-III\uCOS-III\Source\os.h)(0x60D96516)
 I (.\APP\os_cfg.h)(0x60D9651B)
 I (..\uCos-III\uCOS-III\Source\os_type.h)(0x60D9651A)
 I (..\uCos-III\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView\os_cpu.h)(0x60D96515)
-F (.\APP\app_cfg.h)(0x60DABA03)()
+F (.\APP\app_cfg.h)(0x60DAF632)()
 F (.\APP\cpu_cfg.h)(0x60D9651A)()
 F (.\APP\includes.h)(0x60D9651B)()
 F (.\APP\lib_cfg.h)(0x60D9651B)()
@@ -845,7 +845,7 @@ I (..\library\inc\stm32f10x_tim.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_usart.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_wwdg.h)(0x60D9650C)
 I (..\library\inc\misc.h)(0x60D96509)
-I (.\APP\app_cfg.h)(0x60DABA03)
+I (.\APP\app_cfg.h)(0x60DAF632)
 I (.\BSP\bsp_led.h)(0x60D9651C)
 I (.\BSP\bsp_usart2.h)(0x60DABB96)
 F (.\BSP\bsp.h)(0x60DABA8E)()
@@ -894,7 +894,7 @@ I (..\library\inc\stm32f10x_tim.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_usart.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_wwdg.h)(0x60D9650C)
 I (..\library\inc\misc.h)(0x60D96509)
-I (.\APP\app_cfg.h)(0x60DABA03)
+I (.\APP\app_cfg.h)(0x60DAF632)
 I (.\BSP\bsp_led.h)(0x60D9651C)
 I (.\BSP\bsp_usart2.h)(0x60DABB96)
 I (..\uCos-III\uCOS-III\Source\os.h)(0x60D96516)
@@ -946,7 +946,7 @@ I (..\library\inc\stm32f10x_tim.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_usart.h)(0x60D9650B)
 I (..\library\inc\stm32f10x_wwdg.h)(0x60D9650C)
 I (..\library\inc\misc.h)(0x60D96509)
-I (.\APP\app_cfg.h)(0x60DABA03)
+I (.\APP\app_cfg.h)(0x60DAF632)
 I (.\BSP\bsp_led.h)(0x60D9651C)
 I (.\BSP\bsp_usart2.h)(0x60DABB96)
 I (..\uCos-III\uCOS-III\Source\os.h)(0x60D96516)
