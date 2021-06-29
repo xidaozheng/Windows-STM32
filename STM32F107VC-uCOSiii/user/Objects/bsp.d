@@ -43,3 +43,4 @@
 .\objects\bsp.o: ..\library\inc\misc.h
 .\objects\bsp.o: .\APP\app_cfg.h
 .\objects\bsp.o: .\BSP\bsp_led.h
+.\objects\bsp.o: .\BSP\bsp_usart2.h

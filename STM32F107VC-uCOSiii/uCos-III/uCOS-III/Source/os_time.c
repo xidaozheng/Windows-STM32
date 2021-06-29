@@ -122,8 +122,8 @@ void  OSTimeDly (OS_TICK   dly,
              return;
     }
 
-    OS_CRITICAL_ENTER();
-    OSTCBCurPtr->TaskState = OS_TASK_STATE_DLY;
+    OS_CRITICAL_ENTER();								//进入临界段
+    OSTCBCurPtr->TaskState = OS_TASK_STATE_DLY;			//更新延时状态
     OS_TickListInsert(OSTCBCurPtr,
                       dly,
                       opt,
@@ -133,7 +133,7 @@ void  OSTimeDly (OS_TICK   dly,
          return;
     }
     OS_RdyListRemove(OSTCBCurPtr);                          /* Remove current task from ready list                    */
-    OS_CRITICAL_EXIT_NO_SCHED();
+    OS_CRITICAL_EXIT_NO_SCHED();						//退出临界段(无调度)
     OSSched();                                              /* Find next task to run!                                 */
    *p_err = OS_ERR_NONE;
 }

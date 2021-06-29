@@ -53,7 +53,7 @@
 static  OS_TCB   AppTaskStartTCB;
 static	OS_TCB	 AppTaskLed1TCB;
 static	OS_TCB	 AppTaskLed2TCB;
-
+static	OS_TCB	 AppTaskUsart2TCB;
 
 /*
 *********************************************************************************************************
@@ -64,7 +64,7 @@ static	OS_TCB	 AppTaskLed2TCB;
 static  CPU_STK  AppTaskStartStk[APP_TASK_START_STK_SIZE];
 static  CPU_STK  AppTaskLed1Stk[APP_TASK_LED1_STK_SIZE];
 static  CPU_STK  AppTaskLed2Stk[APP_TASK_LED2_STK_SIZE];
-
+static  CPU_STK  AppTaskUsart2Stk[APP_TASK_USART2_STK_SIZE];
 
 /*
 *********************************************************************************************************
@@ -75,6 +75,7 @@ static  CPU_STK  AppTaskLed2Stk[APP_TASK_LED2_STK_SIZE];
 static  void AppTaskStart  (void *p_arg);
 static	void AppTaskLed1(void *p_arg);
 static	void AppTaskLed2(void *p_arg);
+static	void AppTaskUsart2(void *p_arg);
 
 
 /*
@@ -105,7 +106,7 @@ int  main (void)
                  (CPU_STK    *)&AppTaskStartStk[0],				/* 任务堆栈的基地址										*/
                  (CPU_STK_SIZE) APP_TASK_START_STK_SIZE / 10,	/* 地址“水印” 当堆栈生长到90%位置时就不再允许其生长		*/
                  (CPU_STK_SIZE) APP_TASK_START_STK_SIZE,		/* 任务的堆栈大小(单位：unsigned  int) 4个字节			*/
-                 (OS_MSG_QTY  ) 5u,
+                 (OS_MSG_QTY  ) 5u, 
                  (OS_TICK     ) 0u,
                  (void       *) 0,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
@@ -165,12 +166,18 @@ static  void  AppTaskStart (void *p_arg)
 #endif
 
     CPU_IntDisMeasMaxCurReset();
-	
+
+	//由于三个任务的优先级相同，所以需要配置时间片进行轮转调度
+	OSSchedRoundRobinCfg ((CPU_BOOLEAN   )DEF_ENABLED,			//使能时间片轮转调度
+                          (OS_TICK       )0,					//把OSCfg_TickRate_Hz / 10 设为默认时间片值
+                          (OS_ERR       *)&err
+						 );
+
 	OSTaskCreate ( (OS_TCB		*)      &AppTaskLed1TCB,
                    (CPU_CHAR	*)      "App Task Led1",
                    (OS_TASK_PTR  )  	AppTaskLed1,
                    (void        *)		0u,
-                   (OS_PRIO      )  	1u,
+                   (OS_PRIO      )  	APP_TASK_LED1_PRIO,
                    (CPU_STK     *)		&AppTaskLed1Stk[0],
                    (CPU_STK_SIZE )  	APP_TASK_LED1_STK_SIZE/10,
                    (CPU_STK_SIZE )  	APP_TASK_LED1_STK_SIZE,
@@ -185,7 +192,7 @@ static  void  AppTaskStart (void *p_arg)
                    (CPU_CHAR	*)      "App Task Led2",
                    (OS_TASK_PTR  )  	AppTaskLed2,
                    (void        *)		0u,
-                   (OS_PRIO      )  	1u,
+                   (OS_PRIO      )  	APP_TASK_LED2_PRIO,
                    (CPU_STK     *)		&AppTaskLed2Stk[0],
                    (CPU_STK_SIZE )  	APP_TASK_LED2_STK_SIZE/10,
                    (CPU_STK_SIZE )  	APP_TASK_LED2_STK_SIZE,
@@ -195,6 +202,21 @@ static  void  AppTaskStart (void *p_arg)
                    (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                    (OS_ERR      *)		&err
 				 );
+				   
+	OSTaskCreate ( (OS_TCB		*)      &AppTaskUsart2TCB,
+				   (CPU_CHAR	*)      "App Task Usart2",
+				   (OS_TASK_PTR  )  	AppTaskUsart2,
+				   (void        *)		0u,
+				   (OS_PRIO      )  	APP_TASK_USART2_PRIO,
+				   (CPU_STK     *)		&AppTaskUsart2Stk[0],
+				   (CPU_STK_SIZE )  	APP_TASK_USART2_STK_SIZE/10,
+				   (CPU_STK_SIZE )  	APP_TASK_USART2_STK_SIZE,
+				   (OS_MSG_QTY   )  	5u,
+				   (OS_TICK      )  	0u,
+				   (void        *)		0,
+				   (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+				   (OS_ERR      *)		&err
+			 );
 				   
 	OSTaskDel(&AppTaskStartTCB, &err);	//删除主任务
 	if(err != OS_ERR_NONE)
@@ -226,6 +248,20 @@ static	void AppTaskLed2(void *p_arg)
 	while(DEF_TRUE)
 	{
 		bspLedToggle(GPIOD, GPIO_Pin_14);
+		OSTimeDly(1000, OS_OPT_TIME_DLY, &err);
+	}
+}
+
+static	void AppTaskUsart2(void *p_arg)
+{
+	OS_ERR err;
+	
+	(void)p_arg;
+	
+	while(DEF_TRUE)
+	{
+		printf("AppTaskUsart2 Running\n");
+		
 		OSTimeDly(1000, OS_OPT_TIME_DLY, &err);
 	}
 }

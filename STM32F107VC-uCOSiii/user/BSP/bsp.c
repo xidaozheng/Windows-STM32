@@ -161,7 +161,7 @@ CPU_INT32U  BSP_CPU_ClkFreq_MHz;
 void  BSP_Init (void)
 {
 	bspLedInit(); 
-	
+	BSP_usart2Config(115200);
 }
 
 

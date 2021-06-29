@@ -47,6 +47,7 @@
 .\objects\app.o: ..\library\inc\misc.h
 .\objects\app.o: .\APP\app_cfg.h
 .\objects\app.o: .\BSP\bsp_led.h
+.\objects\app.o: .\BSP\bsp_usart2.h
 .\objects\app.o: ..\uCos-III\uCOS-III\Source\os.h
 .\objects\app.o: .\APP\os_cfg.h
 .\objects\app.o: ..\uCos-III\uCOS-III\Source\os_type.h
