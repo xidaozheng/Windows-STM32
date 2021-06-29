@@ -51,6 +51,8 @@
 */
 
 static  OS_TCB   AppTaskStartTCB;
+static	OS_TCB	 AppTaskLed1TCB;
+static	OS_TCB	 AppTaskLed2TCB;
 
 
 /*
@@ -60,6 +62,8 @@ static  OS_TCB   AppTaskStartTCB;
 */
 
 static  CPU_STK  AppTaskStartStk[APP_TASK_START_STK_SIZE];
+static  CPU_STK  AppTaskLed1Stk[APP_TASK_LED1_STK_SIZE];
+static  CPU_STK  AppTaskLed2Stk[APP_TASK_LED2_STK_SIZE];
 
 
 /*
@@ -68,7 +72,9 @@ static  CPU_STK  AppTaskStartStk[APP_TASK_START_STK_SIZE];
 *********************************************************************************************************
 */
 
-static  void  LED1ToggleTastStart  (void *p_arg);
+static  void AppTaskStart  (void *p_arg);
+static	void AppTaskLed1(void *p_arg);
+static	void AppTaskLed2(void *p_arg);
 
 
 /*
@@ -93,7 +99,7 @@ int  main (void)
 
     OSTaskCreate((OS_TCB     *)&AppTaskStartTCB,                /* Create the start task                                */
                  (CPU_CHAR   *)"App Task Start",				/* 任务名字												*/
-                 (OS_TASK_PTR ) LED1ToggleTastStart,			/* 指向任务代码的指针									*/
+                 (OS_TASK_PTR ) AppTaskStart,			/* 指向任务代码的指针									*/
                  (void       *) 0,								/* 任务的参数 可以是任意的指针 例如数据结构				*/
                  (OS_PRIO     ) APP_TASK_START_PRIO,			/* 任务优先级 此处设置的2								*/
                  (CPU_STK    *)&AppTaskStartStk[0],				/* 任务堆栈的基地址										*/
@@ -110,7 +116,8 @@ int  main (void)
 		/* The task didn't get created. Lookup the value of the error code ... 	*/
 		/* ... in OS.H for the meaning of the error								*/
 	}
-				 
+		
+	//全局只需要一个启动
 	OSStart(&err);                                             /* Start multitasking (i.e. give control to uC/OS-III). */
 	if(err != OS_ERR_NONE)
 	{
@@ -135,7 +142,7 @@ int  main (void)
 *********************************************************************************************************
 */
 
-static  void  LED1ToggleTastStart (void *p_arg)
+static  void  AppTaskStart (void *p_arg)
 {
     CPU_INT32U  cpu_clk_freq;
     CPU_INT32U  cnts;
@@ -158,14 +165,70 @@ static  void  LED1ToggleTastStart (void *p_arg)
 #endif
 
     CPU_IntDisMeasMaxCurReset();
-
-
-    while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-			bspLedToggle(GPIOD, GPIO_Pin_13 | GPIO_Pin_14);
-			OSTimeDly ( 1000, OS_OPT_TIME_DLY, & err );
-    }
+	
+	OSTaskCreate ( (OS_TCB		*)      &AppTaskLed1TCB,
+                   (CPU_CHAR	*)      "App Task Led1",
+                   (OS_TASK_PTR  )  	AppTaskLed1,
+                   (void        *)		0u,
+                   (OS_PRIO      )  	1u,
+                   (CPU_STK     *)		&AppTaskLed1Stk[0],
+                   (CPU_STK_SIZE )  	APP_TASK_LED1_STK_SIZE/10,
+                   (CPU_STK_SIZE )  	APP_TASK_LED1_STK_SIZE,
+                   (OS_MSG_QTY   )  	5u,
+                   (OS_TICK      )  	0u,
+                   (void        *)		0,
+                   (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                   (OS_ERR      *)		&err
+				 );
+				   
+	OSTaskCreate ( (OS_TCB		*)      &AppTaskLed2TCB,
+                   (CPU_CHAR	*)      "App Task Led2",
+                   (OS_TASK_PTR  )  	AppTaskLed2,
+                   (void        *)		0u,
+                   (OS_PRIO      )  	1u,
+                   (CPU_STK     *)		&AppTaskLed2Stk[0],
+                   (CPU_STK_SIZE )  	APP_TASK_LED2_STK_SIZE/10,
+                   (CPU_STK_SIZE )  	APP_TASK_LED2_STK_SIZE,
+                   (OS_MSG_QTY   )  	5u,
+                   (OS_TICK      )  	0u,
+                   (void        *)		0,
+                   (OS_OPT       )  	(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                   (OS_ERR      *)		&err
+				 );
+				   
+	OSTaskDel(&AppTaskStartTCB, &err);	//删除主任务
+	if(err != OS_ERR_NONE)
+	{
+		
+	}
 }
 
+
+static	void AppTaskLed1(void *p_arg)
+{
+	OS_ERR      err;
+	
+	(void)p_arg;
+	
+	while(DEF_TRUE)
+	{
+		bspLedToggle(GPIOD, GPIO_Pin_13);
+		OSTimeDly(500, OS_OPT_TIME_DLY, &err);
+	}
+}
+
+static	void AppTaskLed2(void *p_arg)
+{
+	OS_ERR      err;
+	
+	(void)p_arg;
+	
+	while(DEF_TRUE)
+	{
+		bspLedToggle(GPIOD, GPIO_Pin_14);
+		OSTimeDly(1000, OS_OPT_TIME_DLY, &err);
+	}
+}
 
 
 

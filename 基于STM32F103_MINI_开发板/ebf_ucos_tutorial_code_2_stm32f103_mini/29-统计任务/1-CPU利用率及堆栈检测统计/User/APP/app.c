@@ -334,9 +334,9 @@ static  void  AppTaskStatus  ( void * p_arg )
          
       printf ( "LED1任务的CPU利用率：%d.%d%%\r\n", 
                AppTaskLed1TCB.CPUUsageMax / 100, AppTaskLed1TCB.CPUUsageMax % 100 ); 
-      printf ( "LED1任务的CPU利用率：%d.%d%%\r\n", 
-               AppTaskLed2TCB.CPUUsageMax / 100, AppTaskLed2TCB.CPUUsageMax % 100 ); 
       printf ( "LED2任务的CPU利用率：%d.%d%%\r\n", 
+               AppTaskLed2TCB.CPUUsageMax / 100, AppTaskLed2TCB.CPUUsageMax % 100 ); 
+      printf ( "LED3任务的CPU利用率：%d.%d%%\r\n", 
                AppTaskUsartTCB.CPUUsageMax / 100, AppTaskUsartTCB.CPUUsageMax % 100 ); 
       printf ( "统计任务的CPU利用率：%d.%d%%\r\n", 
                AppTaskStatusTCB.CPUUsageMax / 100, AppTaskStatusTCB.CPUUsageMax % 100 ); 
