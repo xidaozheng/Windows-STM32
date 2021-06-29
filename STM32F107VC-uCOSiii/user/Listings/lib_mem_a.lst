@@ -446,9 +446,9 @@ ARM Macro Assembler    Page 7
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\lib_mem_a.d -o.\objects\lib_mem_a.o -I.\RTE\_Target_1 -I
 C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include -IC:\Keil_v5\ARM\CM
-SIS\Include --predefine="__UVISION_VERSION SETA 526" --predefine="STM32F10X_CL 
-SETA 1" --list=.\listings\lib_mem_a.lst ..\uCos-III\uC-LIB\Ports\ARM-Cortex-M3\
-RealView\lib_mem_a.asm
+SIS\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA
+ 526" --predefine="STM32F10X_CL SETA 1" --list=.\listings\lib_mem_a.lst ..\uCos
+-III\uC-LIB\Ports\ARM-Cortex-M3\RealView\lib_mem_a.asm
 
 
 
@@ -674,4 +674,4 @@ em_a.asm
 em_a.asm
 
 18 symbols
-350 symbols in table
+351 symbols in table

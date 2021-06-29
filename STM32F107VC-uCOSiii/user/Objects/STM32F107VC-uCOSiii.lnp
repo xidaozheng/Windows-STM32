@@ -59,7 +59,7 @@
 ".\objects\os_var.o"
 ".\objects\os_cpu_a.o"
 ".\objects\os_cpu_c.o"
---strict --scatter ".\Objects\STM32F107VC-uCOSiii.sct"
+--library_type=microlib --strict --scatter ".\Objects\STM32F107VC-uCOSiii.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\STM32F107VC-uCOSiii.map" -o .\Objects\STM32F107VC-uCOSiii.axf
